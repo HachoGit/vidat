@@ -4,4 +4,5 @@
 ### インストール
 1. このリポジトリをクローン
 2. Node.jsとnpmをインストール
-3. vidat/ で npm installを叩く
+3. vidat/ で "npm install"を叩く
+4. vidat/ で "npm run dev"するとアプリが動く
