@@ -1,12 +1,12 @@
 <template>
   <q-list :class="{'flex justify-evenly full-width': $q.screen.lt.md}">
-    <div v-if="annotationStore.mode !== 'action'">
-      <q-item dense>
+    <!-- <div v-if="annotationStore.mode !== 'action'"> -->
+      <!-- <q-item dense>
         <q-item-section class="text-center">
           Copy
         </q-item-section>
-      </q-item>
-      <q-item>
+      </q-item> -->
+      <!-- <q-item>
         <q-item-section>
           <q-btn-group
               spread
@@ -28,9 +28,9 @@
             </q-btn>
           </q-btn-group>
         </q-item-section>
-      </q-item>
+      </q-item> -->
 
-      <q-item>
+      <!-- <q-item>
         <q-item-section>
           <q-btn-group
               spread
@@ -52,8 +52,8 @@
             </q-btn>
           </q-btn-group>
         </q-item-section>
-      </q-item>
-      <q-item>
+      </q-item> -->
+      <!-- <q-item>
         <q-item-section>
           <q-btn-group
               spread
@@ -69,9 +69,9 @@
             </q-btn>
           </q-btn-group>
         </q-item-section>
-      </q-item>
-    </div>
-    <div>
+      </q-item> -->
+    <!-- </div> -->
+    <!-- <div>
       <q-item dense>
         <q-item-section class="text-center">Mode</q-item-section>
       </q-item>
@@ -129,7 +129,7 @@
           ></q-toggle>
         </q-item-section>
       </q-item>
-    </div>
+    </div> -->
     <div v-if="annotationStore.mode !== 'action'">
       <q-item dense>
         <q-item-section class="text-center">Operation</q-item-section>

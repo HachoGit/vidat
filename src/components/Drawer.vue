@@ -52,26 +52,26 @@ const menuList = [
     label: 'Annotation',
     path: '/'
   },
-  {
-    icon: 'settings',
-    label: 'Configuration',
-    path: '/configuration'
-  },
-  {
-    icon: 'dashboard',
-    label: 'Preference',
-    path: '/preference'
-  },
-  {
-    icon: 'help',
-    label: 'Help',
-    path: '/help'
-  },
-  {
-    icon: 'book',
-    label: 'About',
-    path: '/about'
-  }
+  // {
+  //   icon: 'settings',
+  //   label: 'Configuration',
+  //   path: '/configuration'
+  // },
+  // {
+  //   icon: 'dashboard',
+  //   label: 'Preference',
+  //   path: '/preference'
+  // },
+  // {
+  //   icon: 'help',
+  //   label: 'Help',
+  //   path: '/help'
+  // },
+  // {
+  //   icon: 'book',
+  //   label: 'About',
+  //   path: '/about'
+  // }
 ]
 const { drawer } = storeToRefs(useMainStore())
 const annotationStore = useAnnotationStore()

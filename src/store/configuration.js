@@ -68,8 +68,8 @@ const DEFAULT_CONFIGURATION = {
   actionLabelData: [
     {
       'id': 0,
-      'name': 'default',
-      'color': '#0000FF',
+      'name': 'look',
+      'color': '#00FFFF',
       'objects': [0]
     },
     {

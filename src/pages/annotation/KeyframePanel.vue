@@ -11,21 +11,21 @@
       >
         <q-tooltip>{{ isPaused ? 'play (p)' : 'pause (p)' }}</q-tooltip>
       </q-btn>
-      <q-btn
+      <!-- <q-btn
           outline
           icon="stop"
           :disabled="!showVideoPlayer"
           @click="handleStop"
       >
         <q-tooltip v-if="showVideoPlayer">stop</q-tooltip>
-      </q-btn>
-      <q-btn
+      </q-btn> -->
+      <!-- <q-btn
           outline
           :icon="showEdit ? 'done' : 'edit'"
           @click="showEdit = !showEdit"
       >
         <q-tooltip>{{ showEdit ? 'done' : 'edit' }}</q-tooltip>
-      </q-btn>
+      </q-btn> -->
     </q-btn-group>
     <div
         class="col-grow q-px-lg"
@@ -53,7 +53,7 @@
           @update:model-value="handleInput"
       />
     </div>
-    <q-btn-group flat>
+    <!-- <q-btn-group flat>
       <q-btn
           outline
           icon="keyboard_arrow_left"
@@ -75,7 +75,7 @@
       >
         <q-tooltip>next keyframe (&gt)</q-tooltip>
       </q-btn>
-    </q-btn-group>
+    </q-btn-group> -->
   </div>
   <KeyframeTable v-if="showEdit"/>
 </template>
@@ -109,6 +109,7 @@ const play = () => {
   }, duration)
   videoPlayInterval = setInterval(() => {
     moveLeftFrame(1)
+    // moveRightFrame(1)
   }, 1000 / annotationStore.video.fps / videoPlayer.playbackRate)
 }
 const pause = () => {

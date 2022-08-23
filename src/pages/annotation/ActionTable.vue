@@ -15,13 +15,13 @@
       <div class="col-6 q-table__title">Actions / Video Segments</div>
       <q-space></q-space>
       <q-btn-group flat>
-        <q-btn
+        <!-- <q-btn
             size="sm"
             outline
             :icon="showFilter ? 'expand_more' : 'expand_less'"
             label="filter"
             @click="showFilter = !showFilter"
-        ></q-btn>
+        ></q-btn> -->
         <q-btn
             size="sm"
             outline
@@ -31,7 +31,7 @@
         >
           <q-tooltip>add current range (+)</q-tooltip>
         </q-btn>
-        <q-btn
+        <!-- <q-btn
             size="sm"
             outline
             icon="new_label"
@@ -39,7 +39,7 @@
             @click="handleAddAdvance"
         >
           <q-tooltip>add current range and advance for next</q-tooltip>
-        </q-btn>
+        </q-btn> -->
         <q-btn
             size="sm"
             outline
@@ -127,7 +127,7 @@
           {{ utils.toFixed2(props.row.end - props.row.start) }}
         </q-td>
         <q-td>
-          <img
+          <!-- <img
               v-if="configurationStore.actionLabelData.find(label => label.id === props.row.action).thumbnail"
               class="cursor-pointer rounded-borders vertical-middle float-left q-mr-md"
               style="height: 40px;"
@@ -144,10 +144,10 @@
               emit-value
               map-options
               @update:model-value="handleActionInput(props.row)"
-          ></q-select>
+          ></q-select> -->
         </q-td>
         <q-td>
-          <q-select
+          <!-- <q-select
               v-model="props.row.object"
               :options="objectOptionMap[props.row.action]"
               dense
@@ -155,13 +155,13 @@
               borderless
               emit-value
               map-options
-          ></q-select>
+          ></q-select> -->
         </q-td>
         <q-td
             auto-width
             class="cursor-pointer text-center"
         >
-          <q-chip
+          <!-- <q-chip
               dense
               outline
               :style="{ 'border-color': props.row.color, 'color': props.row.color }"
@@ -174,7 +174,7 @@
               title="Edit the action color"
           >
             <q-color v-model="props.row.color"></q-color>
-          </q-popup-edit>
+          </q-popup-edit> -->
         </q-td>
         <q-td>
           <q-input
@@ -231,6 +231,7 @@ import { useAnnotationStore } from '~/store/annotation.js'
 import { useConfigurationStore } from '~/store/configuration.js'
 import { useMainStore } from '~/store/index.js'
 import ActionThumbnailPreview from '~/components/ActionThumbnailPreview.vue'
+import { checkCompatEnabled } from '@vue/compiler-core'
 
 const annotationStore = useAnnotationStore()
 const configurationStore = useConfigurationStore()
@@ -261,25 +262,25 @@ const columnList = [
   {
     name: 'action',
     align: 'center',
-    label: 'action',
+    label: '',
     field: 'action'
   },
   {
     name: 'object',
     align: 'center',
-    label: 'object',
+    label: '',
     field: 'object'
   },
   {
     name: 'color',
     align: 'center',
-    label: 'color',
+    label: '',
     field: 'color'
   },
   {
     name: 'description',
     align: 'center',
-    label: 'description',
+    label: '',
     field: 'description'
   },
   {
@@ -292,14 +293,28 @@ const columnList = [
 
 // header
 const handleAdd = () => {
-  annotationStore.actionAnnotationList.push(new ActionAnnotation(
-      utils.index2time(annotationStore.leftCurrentFrame),
-      utils.index2time(annotationStore.rightCurrentFrame),
-      configurationStore.actionLabelData[0].id,
-      configurationStore.actionLabelData[0].objects[0],
-      configurationStore.actionLabelData[0].color,
-      ''
-  ))
+  let checkOverlap = false;
+  let start_time = utils.index2time(annotationStore.leftCurrentFrame)
+  let end_time = utils.index2time(annotationStore.rightCurrentFrame)
+  for (let i = 0; i < annotationStore.actionAnnotationList.length; i++) {
+    const actionAnnotation = annotationStore.actionAnnotationList[i]
+    if (!(actionAnnotation.start > end_time || actionAnnotation.end < start_time)) {
+      checkOverlap = true;
+    }
+  }
+
+  if (checkOverlap) {
+    utils.notify('Overlapping with an existing annotation ', 'warning')
+  } else {
+    annotationStore.actionAnnotationList.push(new ActionAnnotation(
+        utils.index2time(annotationStore.leftCurrentFrame),
+        utils.index2time(annotationStore.rightCurrentFrame),
+        configurationStore.actionLabelData[0].id,
+        configurationStore.actionLabelData[0].objects[0],
+        configurationStore.actionLabelData[0].color,
+        ''
+    ))
+  }
 }
 const handleAddAdvance = () => {
   handleAdd()
